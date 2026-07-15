@@ -29,8 +29,8 @@ def check_stock():
         print(f"检测异常: {e}")
 
 if __name__ == "__main__":
-    # 让它连续运行 5.5 小时（因为 GitHub 单次任务最长运行 6 小时）
-    # 每 300 秒（5分钟）检测一次，一共检测 66 次
-    for i in range(66):
+    # 循环 58 次，每次间隔 300 秒（5分钟），总计运行约 290 分钟（4.8小时）
+    # 留出 10 分钟空隙，等待下一个定时任务来无缝接班
+    for i in range(58):
         check_stock()
-        time.sleep(300) # 延迟 300 秒（5分钟）
+        time.sleep(300)
