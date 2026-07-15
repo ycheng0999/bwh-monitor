@@ -2,7 +2,7 @@ name: BWH Stock Monitor
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '0 */6 * * *'  # 每 6 小时自动启动一次
   workflow_dispatch: 
 
 jobs:
@@ -23,4 +23,6 @@ jobs:
     - name: Run Monitor
       env:
         PUSH_KEY: ${{ secrets.PUSH_KEY }}
+      # 增加运行超时保护为 350 分钟（接近 6 小时）
+      timeout-minutes: 350
       run: python monitor.py
