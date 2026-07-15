@@ -2,12 +2,16 @@ name: BWH Stock Monitor
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 每 6 小时自动启动一次
+    # 每 5 小时（北京时间 0点、5点、10点、15点、20点）自动启动一次
+    - cron: '0 */5 * * *'
   workflow_dispatch: 
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    # 既然要长跑，把超时时间设为 360 分钟（6小时）
+    timeout-minutes: 360
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -23,6 +27,4 @@ jobs:
     - name: Run Monitor
       env:
         PUSH_KEY: ${{ secrets.PUSH_KEY }}
-      # 增加运行超时保护为 350 分钟（接近 6 小时）
-      timeout-minutes: 350
       run: python monitor.py
