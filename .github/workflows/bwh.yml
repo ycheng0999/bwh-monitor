@@ -2,15 +2,15 @@ name: BWH Stock Monitor
 
 on:
   schedule:
-    # 每 10 分钟自动运行一次
-    - cron: '*/10 * * * *'
+    # 北京时间每天 0点、5点、10点、15点、20点 自动接班启动
+    - cron: '0 */5 * * *'
   workflow_dispatch: 
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    # 如果这个任务运行超过 2 分钟，GitHub 会无条件强行杀掉进程，物理防卡死
-    timeout-minutes: 2
+    # 允许单次任务最长跑 6 小时（360分钟）
+    timeout-minutes: 360
     
     steps:
     - name: Checkout code
