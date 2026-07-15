@@ -2,15 +2,15 @@ name: BWH Stock Monitor
 
 on:
   schedule:
-    # 每 5 小时（北京时间 0点、5点、10点、15点、20点）自动启动一次
-    - cron: '0 */5 * * *'
+    # 尝试调整为 GitHub 支持的最高免费频率（每 5 分钟）
+    - cron: '*/5 * * * *'
   workflow_dispatch: 
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    # 既然要长跑，把超时时间设为 360 分钟（6小时）
-    timeout-minutes: 360
+    # 限制单次运行最多只能跑 2 分钟，超时强制中断，防止卡死
+    timeout-minutes: 2
     
     steps:
     - name: Checkout code
