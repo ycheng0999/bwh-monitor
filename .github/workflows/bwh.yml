@@ -2,14 +2,14 @@ name: BWH Stock Monitor
 
 on:
   schedule:
-    # 北京时间每天 0点、5点、10点、15点、20点 自动接班启动
+    # 每 5 小时（北京时间 0点、5点、10点、15点、20点）自动启动一次
     - cron: '0 */5 * * *'
   workflow_dispatch: 
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    # 允许单次任务最长跑 6 小时（360分钟）
+    # 既然要长跑，把超时时间设为 360 分钟（6小时）
     timeout-minutes: 360
     
     steps:
